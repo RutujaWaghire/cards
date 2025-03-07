@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Cards</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f4f4f4;
+        }
+        .container {
+            margin: 20px auto;
+            width: 500px;
+            max-width: 600px;
+        }
+        .input-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 10px;
+        }
+        #nameInput {
+            padding: 10px;
+            width: 500px;
+            text-align: center;
+        }
+        .button-container {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        .card-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+        }
+        .card {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+            width: 150px;
+            text-align: center;
+        }
+        .btn {
+            padding: 10px;
+            cursor: pointer;
+            font-size: 14px;
+            border-radius: 5px;
+        }
+        .btn-add { background: #54056c; color: white; }
+        .btn-remove { background: #c13cb8; color: white; }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>  Cards</h2>
+        <div class="input-container">
+            <input type="text" id="nameInput" placeholder="Enter a friend's name">
+        </div>
+        <div class="button-container">
+            <button class="btn btn-add" onclick="addFriend()">Add Friend</button>
+            <button class="btn btn-remove" onclick="removeFriend()">Remove  Friend</button>
+        </div>
+        <div class="card-container" id="cardContainer"></div>
+    </div>
+
+    <script>
+        let friends = ["Virat", "Rohit", "Mahi", "Rahul"];
+
+        function generateCards() {
+            let container = document.getElementById("cardContainer");
+            container.innerHTML = "";
+            friends.forEach(friend => {
+                let card = document.createElement("div");
+                card.className = "card";
+                card.innerHTML = `<h3>${friend}</h3>`;
+                container.appendChild(card);
+            }
+        );
+        }
+
+        function addFriend() {
+            let input = document.getElementById("nameInput");
+            let name = input.value.trim();
+            if (name) {
+                friends.push(name);
+                input.value = "";
+                generateCards();
+            }
+        }
+
+        function removeFriend() {
+            if (friends.length > 0) {
+                friends.pop();
+                generateCards();
+            }
+        }
+
+        generateCards();
+    </script>
+
+</body>
+</html>
